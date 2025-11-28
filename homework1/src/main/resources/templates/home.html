@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style>
+        h2 {
+            text-align: center;
+            color: #c8a2c8;
+            margin-top: 40px;
+        }
+
+        header {
+            background-color: #6a0dad;
+            padding: 15px;
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+        .purplename {
+        color: rebeccapurple;
+        font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <span><a th:href="@{/}">홈</a></span>
+    <span><a th:href="@{/input}">회원가입</a></span>
+    <span><a th:if="${session.loginId == null}" th:href="@{/login}">로그인</a></span>
+    <span><a th:if="${session.loginId != null}" th:href="@{/logout}">로그아웃</a></span>
+    <span><a th:href="@{/memberList}">회원목록</a></span>
+</header>
+
+<h2 th:if="${loginId != null}">
+    <span class="purplename">[[${loginId}]]님</span>
+    홈페이지에 오신 것을 환영합니다.</h2>
+
+<h2 th:if="${loginId == null}">
+    홈페이지에 오신 것을 환영합니다.
+</h2>
+
+</body>
+</html>

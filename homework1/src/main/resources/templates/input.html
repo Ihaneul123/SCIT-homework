@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+
+    <style>
+        h2 {
+            text-align: center;
+            color: #c8a2c8;
+            margin-top: 40px;
+        }
+        header {
+            background-color: #6a0dad;
+            padding: 15px;
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+        table {
+             margin: 50px auto;
+             border-collapse: collapse;
+             border: 1px solid #d6d1e8;
+             padding: 10px;
+             width: 400px;
+             text-align: left;
+
+        }
+
+        th {
+            font-size: 20px;
+            text-align: center;
+            padding: 10px ;
+            color: #6a0dad;
+        }
+
+        td {
+            padding: 4px;
+            text-align: center;
+        }
+
+        td.title {
+            text-align: left;
+            color: #6a0dad;
+            font-size : 15px;
+            padding: 20px ;
+            margin-top: 3px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 300px;
+            padding: 4px;
+        }
+        button[type="submit"] {
+           width: 313px;
+           padding: 6px;
+           background-color: #6a0dad;
+           color: white;
+           border: none;
+           font-size: 16px;
+           border-radius: 5px;
+           cursor: pointer;
+           margin: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<header>
+    <span><a th:href="@{/}">홈</a></span>
+    <span><a th:href="@{/input}">회원가입</a></span>
+    <span><a th:if="${session.loginId == null}" th:href="@{/login}">로그인</a></span>
+    <span><a th:if="${session.loginId != null}" th:href="@{/logout}">로그아웃</a></span>
+    <span><a th:href="@{/memberList}">회원목록</a></span>
+</header>
+
+<form th:action="@{/input}" method="post" onsubmit="return checkForm()" >
+<table>
+    <tr>
+        <th colspan="2">[ 회원정보 입력 ]</th>
+    </tr>
+    <tr>
+        <td class = "title">아이디</td>
+    </tr>
+    <tr>
+        <td><input type="text" name="id"></td>
+    </tr>
+    <tr>
+        <td class = "title">비밀번호</td>
+    </tr>
+    <tr>
+        <td><input type="password" name="pw"></td>
+    </tr>
+    <tr>
+        <td class = "title">비밀번호 확인</td>
+    </tr>
+    <tr>
+        <td><input type="password" name="pw2"></td>
+    </tr>
+    <tr>
+        <td class = "title">이름</td>
+    </tr>
+    <tr>
+        <td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+        <td class = "title">핸드폰</td>
+    </tr>
+    <tr>
+        <td><input type="text" name="phone"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><button type="submit"> 가입 </button></td>
+    </tr>
+</table>
+</form>
+
+<script>
+    function checkForm() {
+
+    let id = document.querySelector("input[name = 'id']").value.trim();
+    let pw = document.querySelector("input[name='pw']").value.trim();
+    let pw2 = document.querySelector("input[name='pw2']").value.trim();
+    let name = document.querySelector("input[name='name']").value.trim();
+    let phone = document.querySelector("input[name='phone']").value.trim();
+
+    if(!id) {
+    alert("아이디는 3~14자 영문, 숫자,특수문자를 포함할 수 있습니다");
+    return false;
+    } else if(!pw) {
+     alert("비밀번호가 비어있거나 일치하지 않습니다.");
+    return false;
+    } else if (pw !== pw2) {
+    alert("비밀번호가 비어있거나 일치하지 않습니다.");
+    return false;
+    }else if (!name) {
+    alert("이름을 입력하세요.");
+    return false;
+    } else if (!phone) {
+    alert("핸드폰 번호를 입력하세요.");
+    return false;
+    }alert("회원가입이 완료되었습니다.");
+    return true;
+
+    }
+
+</script>
+
+</body>
+</html>
